@@ -9,9 +9,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      </main>
+      <div>
+        <header className="w-full h-16 bg-white">
+          <p className="text-white">header</p>
+        </header>
+
+        <main className="relative overflow-hidden">
+          <div
+            className="bg-cover bg-no-repeat bg-center h-screen"
+            style={{
+              backgroundImage: "url('hero.jpg')",
+              filter: "blur(2px) grayscale(60%)",
+              transform: "scale(1.1)",
+            }}
+          />
+        </main>
+
+        <footer className="w-full h-96 bg-black">
+          <p>Footer</p>
+        </footer>
+      </div>
     </>
   )
 }
