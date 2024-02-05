@@ -5,7 +5,7 @@ import type { Viewport } from 'next'
 import './globals.css'
  
 export const metadata: Metadata = {
-  title: 'Vízfő Kabin',
+  title: 'Vízfő Cabin',
   description: 'Bükk is waiting for you with all of its beauty',
   icons: [
     { rel: 'icon', url: '/favicon.ico' },

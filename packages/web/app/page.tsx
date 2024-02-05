@@ -1,8 +1,10 @@
+import BookingWidget from "../components/bookingWidget";
+
 export default function Home() {
   return (
     <div>
       <header className="w-full h-16 bg-white px-10 py-5">
-        <p className="font-bold uppercase text-xl">Vízfő Kabin</p>
+        <p className="font-bold uppercase text-xl">Vízfő Cabin</p>
       </header>
 
       <main className="relative overflow-hidden">
@@ -22,8 +24,8 @@ export default function Home() {
             <h3 className="text-white text-2xl max-w-4xl mt-4">
               Bring daydreams of long trails and chilling in jacuzzi to reality
             </h3>
-            <div className="w-full bg-white/30 h-48 mt-12">
-              {/* <p>test</p> */}
+            <div className="w-full bg-white/30 h-48 mt-12 flex items-center">
+              <BookingWidget />
             </div>
           </div>
         </div>
