@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, FC } from "react"
+import { useState, FC, useEffect } from "react"
 
 import DateSelector from "./dateSelector"
 import NumberOfGuests from "./numberOfGuests"
@@ -12,7 +12,7 @@ const BookingWidget: FC<Props> = () => {
   const [checkOut, setCheckOut] = useState<Date>(new Date())
   const [numberOfGuests, setNumberOfGuests] = useState<number | null>(null)
 
-  const handleDateChange = (date: Date, label: string) => { 
+  const handleDateChange = (date: Date, label: string) => {
     switch (label) {
       case "Check-in":
         setCheckIn(date)
@@ -27,7 +27,7 @@ const BookingWidget: FC<Props> = () => {
   }
 
   const formatDate = (date: Date) => {
-    return date.toISOString().split('T')[0]
+    return date.toISOString().split("T")[0]
   }
 
   const bookNow = async () => {
@@ -44,10 +44,38 @@ const BookingWidget: FC<Props> = () => {
     })
   }
 
+  useEffect(() => {
+    const ws = new WebSocket(process.env.NEXT_PUBLIC_WS_URL ?? "")
+
+    ws.onopen = () => {
+      console.log("WebSocket connected")
+    }
+
+    ws.onmessage = (event) => {
+      console.log(event.data)
+    }
+
+    ws.onclose = () => {
+      console.log("WebSocket closed")
+    }
+
+    return () => {
+      ws.close()
+    }
+  }, [])
+
   return (
     <div className="w-full flex">
-      <DateSelector label="Check-in" value={formatDate(checkIn)} setDate={handleDateChange} />
-      <DateSelector label="Check-out" value={formatDate(checkOut)} setDate={handleDateChange} />
+      <DateSelector
+        label="Check-in"
+        value={formatDate(checkIn)}
+        setDate={handleDateChange}
+      />
+      <DateSelector
+        label="Check-out"
+        value={formatDate(checkOut)}
+        setDate={handleDateChange}
+      />
       <NumberOfGuests value={numberOfGuests} setValue={setNumberOfGuests} />
       <div className="ml-auto self-center mr-32">
         <button

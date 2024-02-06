@@ -45,6 +45,7 @@ export function Default({ stack }: StackContext) {
         bind: [connectionsTable],
       },
     },
+    customDomain: "ws.vizfokabin.com",
     routes: {
       $connect: "packages/functions/ws/connect.main",
       $disconnect: "packages/functions/ws/disconnect.main",
@@ -58,7 +59,10 @@ export function Default({ stack }: StackContext) {
       domainName: "vizfokabin.com",
       domainAlias: "www.vizfokabin.com",
     },
-    bind: [queue, wsApi],
+    bind: [queue],
+    environment: {
+      NEXT_PUBLIC_WS_URL: wsApi.url,
+    },
   })
 
   stack.addOutputs({
