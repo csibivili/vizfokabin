@@ -25,7 +25,6 @@ export function Default({ stack }: StackContext) {
     bind: [bookFunction],
   })
 
-
   stack.addOutputs({
     SiteUrl: site.url,
     BookFunction: bookFunction.functionName,

@@ -2,19 +2,14 @@ import { type NextRequest, NextResponse } from "next/server"
 
 import { invokeLambda } from "../../../../core/invokeLambda"
 
-export const dynamic = "force-dynamic" // defaults to auto
 export async function POST(request: NextRequest) {
+  const body = await request.json()
+  //TODO: instead of lambda invoke add new item to a sqs queue
   const response = await invokeLambda({
     functionName: "Book",
-    body: {
-      message: "Hello",
-    }
+    body,
   })
-  console.log(response)
-  return new NextResponse(JSON.stringify({ message: "Hello" }), {
-    status: 200,
-    headers: {
-      "content-type": "application/json",
-    },
+  return new NextResponse(JSON.stringify(response), {
+    status: response.status,
   })
 }

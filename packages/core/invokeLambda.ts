@@ -1,40 +1,29 @@
-import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
-import { fromUtf8, toUtf8 } from '@aws-sdk/util-utf8-node';
+import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda"
+import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8-node"
 
-const lambdaClient = new LambdaClient({ region: 'eu-central-1' });
+const lambdaClient = new LambdaClient({ region: "eu-central-1" })
 
-export interface LambdaHandlerProps {
-  headers?: unknown;
-  body?: unknown;
+export interface LambdaHandlerProps<T extends Record<string, unknown>> {
+  body: T
 }
 
-export interface InvokeLambdaProps {
-  functionName: string;
-  invocationType?: 'Event' | 'RequestResponse';
+interface InvokeLambdaProps {
+  functionName: string
 }
 
-export const invokeLambda = async ({
+export const invokeLambda = async <T extends Record<string, unknown>>({
   functionName,
-  headers,
   body,
-  invocationType = 'RequestResponse',
-}: InvokeLambdaProps & LambdaHandlerProps): Promise<any> => {
+}: InvokeLambdaProps & LambdaHandlerProps<T>): Promise<
+  Record<string, unknown> & { status: number }
+> => {
   const invokeCommand = new InvokeCommand({
     FunctionName: functionName,
-    InvocationType: invocationType,
-    LogType: 'Tail',
-    Payload: fromUtf8(
-      JSON.stringify({
-        body,
-        headers
-      })
-    )
-  });
-  const { Payload } = await lambdaClient.send(invokeCommand);
+    InvocationType: "RequestResponse",
+    LogType: "Tail",
+    Payload: fromUtf8(JSON.stringify({ body })),
+  })
+  const { Payload } = await lambdaClient.send(invokeCommand)
 
-  if (invocationType === 'Event') {
-    return undefined;
-  }
-
-  return JSON.parse(toUtf8(Payload as Uint8Array));
-};
+  return JSON.parse(toUtf8(Payload as Uint8Array))
+}
