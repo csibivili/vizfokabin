@@ -1,7 +1,14 @@
-import { StackContext, NextjsSite, Table, Function } from "sst/constructs"
+import {
+  StackContext,
+  NextjsSite,
+  Table,
+  Function,
+  Queue,
+  WebSocketApi
+} from "sst/constructs"
 
 export function Default({ stack }: StackContext) {
-  const table = new Table(stack, "Bookings", {
+  const bookingsTable = new Table(stack, "Bookings", {
     fields: {
       year_month: "string",
       day: "number",
@@ -13,8 +20,37 @@ export function Default({ stack }: StackContext) {
     runtime: "nodejs20.x",
     handler: "packages/functions/book.handler",
     functionName: "Book",
-    bind: [table],
+    bind: [bookingsTable],
   })
+
+  const queue = new Queue(stack, "BookingsQueue", {
+    consumer: bookFunction,
+    cdk: {
+      queue: {
+        fifo: true,
+      }
+    }
+  })
+
+  const connectionsTable = new Table(stack, "Connections", {
+    fields: {
+      id: "string",
+    },
+    primaryIndex: { partitionKey: "id" },
+  });
+
+  const wsApi = new WebSocketApi(stack, "ws", {
+    defaults: {
+      function: {
+        bind: [connectionsTable],
+      },
+    },
+    routes: {
+      $connect: "packages/functions/ws/connect.main",
+      $disconnect: "packages/functions/ws/disconnect.main",
+      sendmessage: "packages/functions/ws/sendMessage.main",
+    },
+  });
 
   const site = new NextjsSite(stack, "site", {
     path: "packages/web",
@@ -22,11 +58,12 @@ export function Default({ stack }: StackContext) {
       domainName: "vizfokabin.com",
       domainAlias: "www.vizfokabin.com",
     },
-    bind: [bookFunction],
+    bind: [queue, wsApi],
   })
 
   stack.addOutputs({
     SiteUrl: site.url,
     BookFunction: bookFunction.functionName,
+    WebSocketApiUrl: wsApi.url,
   })
 }
