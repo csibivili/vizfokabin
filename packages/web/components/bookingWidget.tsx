@@ -4,6 +4,8 @@ import { useState, FC, useEffect } from "react"
 
 import DateSelector from "./dateSelector"
 import NumberOfGuests from "./numberOfGuests"
+import Modal from "./modal"
+import Calendar from "./calendar"
 
 const BookingWidget: FC = () => {
   const [checkIn, setCheckIn] = useState<Date>(new Date()) //todo: set to zero
@@ -91,6 +93,9 @@ const BookingWidget: FC = () => {
           Book now
         </button>
       </div>
+      <Modal isOpen={true} onClose={() => {}}>
+        <Calendar />
+      </Modal>
     </div>
   )
 }
