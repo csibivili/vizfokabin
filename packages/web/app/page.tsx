@@ -1,4 +1,4 @@
-import BookingWidget from "../components/bookingWidget";
+import BookingWidget from "../components/bookingWidget"
 
 export default function Home() {
   return (
@@ -17,14 +17,20 @@ export default function Home() {
           }}
         >
           <div className="absolute inset-0 bg-black opacity-50" />
-          <div className="absolute inset-0 flex flex-col justify-end p-10">
-            <h2 className="text-white text-7xl font-bold max-w-4xl">
-              Bükk is waiting for you with all of its beauty
-            </h2>
-            <h3 className="text-white text-2xl max-w-4xl mt-4">
-              Bring daydreams of long trails and chilling in jacuzzi to reality
-            </h3>
-            <div className="w-full bg-white/30 h-48 mt-12 flex items-center">
+          <div className="absolute inset-0 grid grid-cols-4">
+
+            <div className="col-span-3 pl-10 flex flex-col justify-end pb-16">
+              <div className="flex flex-col">
+              <h2 className="text-white text-7xl font-bold max-w-4xl">
+                Bükk is waiting for you with all of its beauty
+              </h2>
+              <h3 className="text-white text-2xl max-w-4xl mt-4">
+                Bring daydreams of long trails and chilling in jacuzzi to
+                reality
+              </h3>
+              </div>
+            </div>
+            <div className="overflow-auto flex items-center">
               <BookingWidget />
             </div>
           </div>

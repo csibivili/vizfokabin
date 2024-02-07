@@ -71,7 +71,7 @@ const BookingWidget: FC = () => {
   }, [bookingId])
 
   return (
-    <div className="w-full flex">
+    <div className="grid bg-white/30 p-10">
       <DateSelector
         label="Check-in"
         value={formatDate(checkIn)}
@@ -83,10 +83,10 @@ const BookingWidget: FC = () => {
         setDate={handleDateChange}
       />
       <NumberOfGuests value={numberOfGuests} setValue={setNumberOfGuests} />
-      <div className="ml-auto self-center mr-32">
+      <div className="w-40 mt-4">
         <button
           onClick={bookNow}
-          className="bg-white px-8 py-4 font-semibold uppercase cursor-pointer hover:bg-black hover:text-white"
+          className="w-full bg-white px-8 py-4 font-semibold uppercase cursor-pointer hover:bg-black hover:text-white"
         >
           Book now
         </button>
