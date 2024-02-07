@@ -5,13 +5,21 @@ import { Table } from "sst/node/table"
 
 export const main: APIGatewayProxyHandler = async (event) => {
   const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
+  const { bookingId } = event.queryStringParameters as Record<string, string>
   const { connectionId } = event.requestContext
   const update = new UpdateCommand({
-    TableName: Table.Connections.tableName,
+    TableName: Table.Customers.tableName,
     Key: {
-      id: connectionId,
+      bookingId,
+    },
+    UpdateExpression:
+      "SET connectionId = :connectionId, updatedAt = :updatedAt, createdAt = :createdAt",
+    ExpressionAttributeValues: {
+      ":connectionId": connectionId,
+      ":updatedAt": new Date().toISOString(),
+      ":createdAt": new Date().toISOString(),
     },
   })
   await db.send(update)
-  return { statusCode: 200, body: "Connected" }
+  return { statusCode: 200, body: "connected" }
 }

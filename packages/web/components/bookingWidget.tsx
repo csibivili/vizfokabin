@@ -5,12 +5,11 @@ import { useState, FC, useEffect } from "react"
 import DateSelector from "./dateSelector"
 import NumberOfGuests from "./numberOfGuests"
 
-interface Props {}
-
-const BookingWidget: FC<Props> = () => {
-  const [checkIn, setCheckIn] = useState<Date>(new Date())
+const BookingWidget: FC = () => {
+  const [checkIn, setCheckIn] = useState<Date>(new Date()) //todo: set to zero
   const [checkOut, setCheckOut] = useState<Date>(new Date())
   const [numberOfGuests, setNumberOfGuests] = useState<number | null>(null)
+  const [bookingId, setBookingId] = useState<string | null>(null)
 
   const handleDateChange = (date: Date, label: string) => {
     switch (label) {
@@ -31,7 +30,7 @@ const BookingWidget: FC<Props> = () => {
   }
 
   const bookNow = async () => {
-    await fetch("/api/bookings", {
+    const response = await fetch("/api/bookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,27 +41,34 @@ const BookingWidget: FC<Props> = () => {
         numberOfGuests,
       }),
     })
+    const data = await response.json()
+    setBookingId(data.bookingId)
   }
 
   useEffect(() => {
-    const ws = new WebSocket(process.env.NEXT_PUBLIC_WS_URL ?? "")
+    let ws: WebSocket | null = null
 
-    ws.onopen = () => {
-      console.log("WebSocket connected")
-    }
+    if (bookingId) {
+      ws = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL}/?bookingId=${bookingId}`)
 
-    ws.onmessage = (event) => {
-      console.log(event.data)
-    }
+      ws.onopen = () => {
+        console.log("WebSocket connected")
+      }
 
-    ws.onclose = () => {
-      console.log("WebSocket closed")
+      ws.onmessage = (event) => {
+        console.log(event.data)
+      }
+
+      ws.onclose = () => {
+        console.log("WebSocket closed")
+        //todo: reconnect
+      }
     }
 
     return () => {
-      ws.close()
+      ws?.close()
     }
-  }, [])
+  }, [bookingId])
 
   return (
     <div className="w-full flex">

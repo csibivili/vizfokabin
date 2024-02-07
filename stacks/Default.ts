@@ -4,10 +4,10 @@ import {
   Table,
   Function,
   Queue,
-  WebSocketApi
+  WebSocketApi,
 } from "sst/constructs"
 
-export function Default({ stack }: StackContext) {
+export function Default({ stack, app }: StackContext) {
   const bookingsTable = new Table(stack, "Bookings", {
     fields: {
       year_month: "string",
@@ -16,11 +16,33 @@ export function Default({ stack }: StackContext) {
     primaryIndex: { partitionKey: "year_month", sortKey: "day" },
   })
 
+  const customersTable = new Table(stack, "Customers", {
+    fields: {
+      bookingId: "string",
+    },
+    primaryIndex: { partitionKey: "bookingId" },
+  })
+
+  const wsApi = new WebSocketApi(stack, "ws", {
+    defaults: {
+      function: {
+        bind: [customersTable],
+      },
+    },
+    customDomain:
+      stack.stage === "prod"
+        ? { domainName: "ws.vizfokabin.com", hostedZone: "vizfokabin.com" }
+        : undefined,
+    routes: {
+      $connect: "packages/functions/ws/connect.main",
+      $disconnect: "packages/functions/ws/disconnect.main",
+    },
+  })
+
   const bookFunction = new Function(stack, "Book", {
     runtime: "nodejs20.x",
     handler: "packages/functions/book.handler",
-    functionName: "Book",
-    bind: [bookingsTable],
+    bind: [bookingsTable, customersTable, wsApi],
   })
 
   const queue = new Queue(stack, "BookingsQueue", {
@@ -28,30 +50,9 @@ export function Default({ stack }: StackContext) {
     cdk: {
       queue: {
         fifo: true,
-      }
-    }
-  })
-
-  const connectionsTable = new Table(stack, "Connections", {
-    fields: {
-      id: "string",
-    },
-    primaryIndex: { partitionKey: "id" },
-  });
-
-  const wsApi = new WebSocketApi(stack, "ws", {
-    defaults: {
-      function: {
-        bind: [connectionsTable],
       },
     },
-    customDomain: "ws.vizfokabin.com",
-    routes: {
-      $connect: "packages/functions/ws/connect.main",
-      $disconnect: "packages/functions/ws/disconnect.main",
-      sendmessage: "packages/functions/ws/sendMessage.main",
-    },
-  });
+  })
 
   const site = new NextjsSite(stack, "site", {
     path: "packages/web",
@@ -65,9 +66,13 @@ export function Default({ stack }: StackContext) {
     },
   })
 
+  if (stack.stage !== "prod") {
+    app.setDefaultRemovalPolicy("destroy")
+  }
+
   stack.addOutputs({
-    SiteUrl: site.url,
+    SiteUrl: site.customDomainUrl || site.url,
     BookFunction: bookFunction.functionName,
-    WebSocketApiUrl: wsApi.url,
+    WebSocketApiUrl: wsApi.customDomainUrl || wsApi.url,
   })
 }

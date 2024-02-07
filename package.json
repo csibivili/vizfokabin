@@ -7,8 +7,8 @@
     "dev": "AWS_PROFILE=personal sst dev",
     "build": "sst build",
     "deploy": "AWS_PROFILE=personal sst deploy --stage prod",
-    "remove": "sst remove",
-    "console": "sst console",
+    "remove": "AWS_PROFILE=personal sst remove",
+    "remove:prod": "AWS_PROFILE=personal sst remove --stage prod",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

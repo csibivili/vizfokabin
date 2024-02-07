@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     MessageGroupId: "bookings",
     MessageDeduplicationId: id,
   })
-  await client.send(command)
+  client.send(command)
 
   return new NextResponse(JSON.stringify({ bookingId: id }), {
     status: 200,

@@ -8,6 +8,7 @@ import { Table } from "sst/node/table"
 import { SQSEvent } from "aws-lambda"
 
 import type { Booking } from "../core/types/Booking"
+import { sendMessage } from "../core/lib/wsClient"
 
 const toTableKeys = (date: string): [string, number] => {
   const [year, month, day] = date.split("-")
@@ -36,7 +37,16 @@ export const handler = async (event: SQSEvent) => {
 
   const db = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
-  const available = await Promise.all(
+  const getConnection = new GetCommand({
+    TableName: Table.Customers.tableName,
+    Key: {
+      bookingId,
+    },
+  })
+  const getConnectionResult = await db.send(getConnection)
+  const connection = getConnectionResult.Item?.connectionId
+
+  const interval = await Promise.all(
     dates.map((date) => {
       const [year_month, day] = toTableKeys(date)
       const get = new GetCommand({
@@ -49,10 +59,15 @@ export const handler = async (event: SQSEvent) => {
       return db.send(get)
     })
   )
-  if (available.some((res) => res.Item?.bookingId)) {
+  if (interval.some((res) => res.Item?.bookingId)) {
+    //TODO: checkin and checkout can be done in the same day
+    await sendMessage(
+      connection,
+      JSON.stringify({ error: "Dates are not available" })
+    )
     return
   }
-  
+
   await Promise.all(
     dates.map((date) => {
       const [year_month, day] = toTableKeys(date)
@@ -63,16 +78,19 @@ export const handler = async (event: SQSEvent) => {
           day,
         },
         UpdateExpression:
-          "SET bookingId = :id, numberOfGuests = :numberOfGuests, updatedAt = :updatedAt",
+          "SET bookingId = :bookingId, numberOfGuests = :numberOfGuests, updatedAt = :updatedAt, createdAt = :createdAt, bookingStatus = :bookingStatus",
         ExpressionAttributeValues: {
-          ":id": bookingId,
+          ":bookingId": bookingId,
           ":numberOfGuests": numberOfGuests,
           ":updatedAt": new Date().toISOString(),
+          ":createdAt": new Date().toISOString(),
+          ":bookingStatus": "ongoing",
         },
       })
       return db.send(update)
     })
   )
 
+  await sendMessage(connection, JSON.stringify({ message: "OK" }))
   return { bookingId }
 }
