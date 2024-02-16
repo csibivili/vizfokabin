@@ -4,8 +4,6 @@ import { useState, FC, useEffect } from "react"
 
 import DateSelector from "./dateSelector"
 import NumberOfGuests from "./numberOfGuests"
-import Modal from "./modal"
-import Calendar from "./calendar"
 
 const BookingWidget: FC = () => {
   const [checkIn, setCheckIn] = useState<Date>(new Date()) //todo: set to zero
@@ -51,7 +49,9 @@ const BookingWidget: FC = () => {
     let ws: WebSocket | null = null
 
     if (bookingId) {
-      ws = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL}/?bookingId=${bookingId}`)
+      ws = new WebSocket(
+        `${process.env.NEXT_PUBLIC_WS_URL}/?bookingId=${bookingId}`
+      )
 
       ws.onopen = () => {
         console.log("WebSocket connected")
@@ -73,7 +73,7 @@ const BookingWidget: FC = () => {
   }, [bookingId])
 
   return (
-    <div className="grid bg-white/30 p-10">
+    <div className="grid grid-cols-4 bg-white/30 p-10">
       <DateSelector
         label="Check-in"
         value={formatDate(checkIn)}
@@ -93,9 +93,6 @@ const BookingWidget: FC = () => {
           Book now
         </button>
       </div>
-      <Modal isOpen={true} onClose={() => {}}>
-        <Calendar />
-      </Modal>
     </div>
   )
 }

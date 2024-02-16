@@ -13,12 +13,14 @@ const DateSelector: React.FC<Props> = ({ label, setDate, value }) => {
   }
 
   return (
-    <div className="flex flex-col">
-      <label className="text-white my-2">{label}</label>
-      {/* <Calendar /> */}
-      <div className="flex items-center">
+    <div className="flex flex-col mr-5">
+      <label className="text-white mb-2">{label}</label>
+        <Calendar />
+      {/* <div className="p-4">
+      </div> */}
+      {/* <div className="flex items-center">
         <input type="date" className="w-40 h-10 bg-white/50 px-2" onChange={handleDateChange} value={value} />
-      </div>
+      </div> */}
     </div>
   )
 }

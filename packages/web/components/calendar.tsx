@@ -104,7 +104,7 @@ const Calendar = () => {
             key={day.toString()}
             className={classNames(
               dayIdx === 0 && colStartClasses[getDay(day)],
-              "p-2"
+              "p-0.5"
             )}
           >
             <button

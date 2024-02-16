@@ -13,7 +13,7 @@ const NumberOfGuests: FC<Props> = ({ value, setValue }) => {
   }
   return (
     <div className="flex flex-col w-40">
-      <label className="text-white my-2">Guests</label>
+      <label className="text-white mb-2">Guests</label>
       <div className="relative inline-block text-left">
         <div>
           <button

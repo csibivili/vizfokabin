@@ -17,20 +17,20 @@ export default function Home() {
           }}
         >
           <div className="absolute inset-0 bg-black opacity-50" />
-          <div className="absolute inset-0 grid grid-cols-4">
+          <div className="absolute inset-0 grid grid-rows-3">
 
-            <div className="col-span-3 pl-10 flex flex-col justify-end pb-16">
-              <div className="flex flex-col">
-              <h2 className="text-white text-7xl font-bold max-w-4xl">
+            <div className="row-span-3 pl-10 flex flex-col pb-4">
+              <div className="flex flex-col mt-auto">
+              <h2 className="text-white text-5xl font-bold">
                 Bükk is waiting for you with all of its beauty
               </h2>
-              <h3 className="text-white text-2xl max-w-4xl mt-4">
+              <h3 className="text-white text-2xl mt-4">
                 Bring daydreams of long trails and chilling in jacuzzi to
                 reality
               </h3>
               </div>
             </div>
-            <div className="overflow-auto flex items-center">
+            <div className="overflow-auto">
               <BookingWidget />
             </div>
           </div>
