@@ -74,18 +74,15 @@ const BookingWidget: FC = () => {
 
   return (
     <div className="grid grid-cols-4 bg-white/30 p-10">
-      <DateSelector
-        label="Check-in"
-        value={formatDate(checkIn)}
-        setDate={handleDateChange}
-      />
-      <DateSelector
-        label="Check-out"
-        value={formatDate(checkOut)}
-        setDate={handleDateChange}
-      />
+      <div className="col-span-2">
+        <DateSelector
+          label="Check-in / Check-out"
+          value={formatDate(checkIn)}
+          setDate={handleDateChange}
+        />
+      </div>
       <NumberOfGuests value={numberOfGuests} setValue={setNumberOfGuests} />
-      <div className="w-40 mt-4">
+      <div className="w-full mt-auto">
         <button
           onClick={bookNow}
           className="w-full bg-white px-8 py-4 font-semibold uppercase cursor-pointer hover:bg-black hover:text-white"

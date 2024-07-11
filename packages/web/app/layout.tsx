@@ -5,9 +5,9 @@ import type { Viewport } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Vízfő Cabin",
-  description: "Bükk is waiting for you with all of its beauty",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  title: "Vízfő Kabin",
+  description: "Tarts egy kis szünetet, és lazíts egyet a Bükkben",
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 }
 
 export const viewport: Viewport = {
