@@ -8,12 +8,15 @@ export default function Home() {
   return (
     <div className="bg-gray-950">
       <header className="w-full h-24 bg-gray-950 fixed z-50">
-        <div className="max-w-screen-2xl mx-auto w-full flex items-center h-full">
+        <div className="max-w-screen-2xl mx-auto w-full flex items-center h-full justify-between">
           <div>
             <Image src="/logo.svg" alt="Vízfő Kabin" width={120} height={120} />
           </div>
+          <div className="hidden md:flex gap-4 pr-4">
+            <AirbnbButton />
+            <BookingButton />
+          </div>
         </div>
-        {/* <p className="font-bold uppercase text-xl">Vízfő Kabin</p> */}
       </header>
 
       <main className="relative overflow-hidden">
@@ -51,7 +54,32 @@ export default function Home() {
 
       <footer className="w-full md:h-96 bg-gray-800 py-8">
         <div className="max-w-screen-2xl mx-auto grid md:grid-cols-3 text-white text-lg">
-          <div className="text-center flex flex-col justify-center"></div>
+          <div className="flex justify-center items-center py-4">
+            <div className="flex gap-4">
+              <Link
+                href="https://www.facebook.com/profile.php?id=61560278563124"
+                target="_blank"
+              >
+                <Image
+                  src="/fb.webp"
+                  alt="Vízfő Kabin Facebook"
+                  width={60}
+                  height={60}
+                />
+              </Link>
+              <Link
+                href="https://www.instagram.com/vizfokabin/"
+                target="_blank"
+              >
+                <Image
+                  src="/insta.webp"
+                  alt="Vízfő Kabin Instagram"
+                  width={60}
+                  height={60}
+                />
+              </Link>
+            </div>
+          </div>
           <div className="text-center flex flex-col justify-center">
             <p className="font-bold">Vízfő Kabin</p>
             <p>3425 Sály, Vízfő telep 662/5</p>
