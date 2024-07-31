@@ -7,7 +7,7 @@ import BookingButton from "@/components/bookingButton"
 export default function Home() {
   return (
     <div className="bg-gray-950">
-      <header className="w-full h-24 bg-gray-950 fixed z-50">
+      <header className="w-full h-24 bg-gray-950 hidden md:flex fixed z-50">
         <div className="max-w-screen-2xl mx-auto w-full flex items-center h-full justify-between">
           <div>
             <Image src="/logo.svg" alt="Vízfő Kabin" width={120} height={120} />
@@ -21,7 +21,7 @@ export default function Home() {
 
       <main className="relative overflow-hidden">
         <div className="h-screen bg-gray-700">
-          <div className="absolute inset-0 max-w-screen-2xl justify-self-center">
+          <div className="absolute inset-0 justify-self-center blur-sm">
             <div className="absolute inset-0 bg-black opacity-50" />
             <Image
               src="/hero.jpg"
@@ -31,8 +31,18 @@ export default function Home() {
               className="object-cover object-center"
             />
           </div>
+          <div className="absolute inset-0 max-w-screen-2xl justify-self-center">
+            <div className="absolute inset-0 md:bg-black opacity-30" />
+            <Image
+              src="/hero.jpg"
+              width={1920}
+              height={1080}
+              alt="hero"
+              className="object-cover object-center"
+            />
+          </div>
           <div className="absolute inset-0 grid grid-rows-3 max-w-screen-2xl justify-self-center w-full">
-            <div className="row-span-3 px-10 flex flex-col pb-16">
+            <div className="row-span-3 px-10 flex flex-col pb-8 md:pb-16">
               <div className="flex flex-col mt-auto mb-4 md:max-w-screen-md">
                 <h2 className="text-white text-3xl font-bold md:text-5xl">
                   Tarts egy kis szünetet, és lazíts egyet a{" "}
