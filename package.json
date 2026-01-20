@@ -1,0 +1,16 @@
+{
+    "name": "vizfokabin",
+    "scripts": {
+        "start:site:dev": "pnpm --filter site dev",
+        "deploy:site:dev": "pnpm --filter site build && pulumi up"
+    },
+    "devDependencies": {
+        "@types/node": "^18",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^7.0.0",
+        "@pulumi/synced-folder": "^0.12.4",
+        "@pulumi/pulumi": "^3.113.0"
+    }
+}

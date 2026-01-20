@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Wine Name 1",
+		"year": "2020",
+		"description": "A delightful wine with notes of berries and oak."
+	},
+	{
+		"name": "Wine Name 2",
+		"year": "2021",
+		"description": "Elegant and smooth with a long finish."
+	},
+	{
+		"name": "Wine Name 3",
+		"year": "2019",
+		"description": "Rich and full-bodied with complex flavors."
+	},
+	{
+		"name": "Wine Name 4",
+		"year": "2022",
+		"description": "Fresh and vibrant with citrus undertones."
+	}
+]
