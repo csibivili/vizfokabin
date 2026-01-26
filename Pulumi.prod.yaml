@@ -1,0 +1,8 @@
+config:
+  aws:region: eu-central-1
+  vizfokabin:errorDocument: index.html
+  vizfokabin:indexDocument: index.html
+  vizfokabin:path: ./site/dist
+  # Add your production domain here:
+  vizfokabin:domainName: "vizfokabin.com"
+  vizfokabin:hostedZoneId: "Z011876332AGAZ4VOU8YA"  # Optional
