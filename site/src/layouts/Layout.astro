@@ -1,14 +1,52 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+	favicon?: string;
+	image?: string;
+}
+
+const {
+	title = "Vizfő Kabin - Prémium pihenés",
+	description = "Fedezd fel a Bükk hegység szépségeit",
+	favicon = "/favicon.svg",
+	image = "/favicon.svg",
+} = Astro.props;
+
+const siteUrl = Astro.site?.href || Astro.url.origin;
+const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWith("/") ? image : `/${image}`}`;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={favicon} />
 		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url.href} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={fullImageUrl} />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={Astro.url.href} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={fullImageUrl} />
+		
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet" />
-		<title>Astro Basics</title>
 	</head>
 	<body>
 		<slot />
