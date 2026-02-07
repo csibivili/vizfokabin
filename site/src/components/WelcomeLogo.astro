@@ -1,0 +1,8 @@
+---
+import defaultLogo from '../assets/images/logos/default.svg';
+const logoUrl = typeof defaultLogo === 'string' ? defaultLogo : defaultLogo.src;
+---
+
+<div class="w-3/4 flex justify-center">
+	<img src={logoUrl} alt="Vizfő Kabin Logo" class="w-[50%] h-auto drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]" />
+</div>

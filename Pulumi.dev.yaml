@@ -1,0 +1,5 @@
+config:
+  aws:region: eu-central-1
+  vizfokabin:errorDocument: index.html
+  vizfokabin:indexDocument: index.html
+  vizfokabin:path: ./site/dist

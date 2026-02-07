@@ -1,0 +1,12 @@
+---
+import heroImage from '../assets/images/hero/1.jpg';
+import Header from './Header.astro';
+import WelcomeLogo from './WelcomeLogo.astro';
+---
+
+<div class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style={`background-image: url(${heroImage.src})`}>
+	<Header />
+	<div class="flex flex-col items-center gap-6">
+		<WelcomeLogo />
+	</div>
+</div>
