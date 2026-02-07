@@ -1,4 +1,7 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
 interface Props {
 	title?: string
 	description?: string
@@ -61,11 +64,11 @@ const fullImageUrl = image.startsWith("http")
 				--ldg-psb-color-primary: #b6b500;
 				--ldg-psb-color-primary-lighter: #dbda80;
 				--ldg-psb-color-primary-darker: #5b5b00;
-				--ldg-psb-color-primary-contrast: #0d0d0d;
+				--ldg-psb-color-primary-contrast: #212121;
 				--ldg-semantic-color-primary: #b6b500;
 				--ldg-semantic-color-primary-lighter: #dbda80;
 				--ldg-semantic-color-primary-darker: #5b5b00;
-				--ldg-semantic-color-primary-contrast: #0d0d0d;
+				--ldg-semantic-color-primary-contrast: #212121;
 				--ldg-component-modal-z-index: 999;
 			}
 			#lodgify-search-bar {
@@ -76,12 +79,14 @@ const fullImageUrl = image.startsWith("http")
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
 	<body>
+		<Header />
 		<slot />
+		<Footer />
 	</body>
 </html>
 
@@ -94,6 +99,6 @@ const fullImageUrl = image.startsWith("http")
 		margin: 0;
 		width: 100%;
 		height: 100%;
-		font-family: "Libre Caslon Display", serif;
+		font-family: "Roboto", sans-serif;
 	}
 </style>

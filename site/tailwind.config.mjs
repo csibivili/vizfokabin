@@ -4,12 +4,14 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				// Override default white and black
-				white: '#FFFDD0',
+				white: '#ffffff',
+				primary: '#b6b500',
+				primaryLight: '#dbda80',
+				primaryDark: '#5b5b00',
 				black: '#212121',
 			},
 			fontFamily: {
-				sans: ['Libre Caslon Display', 'serif'],
+				sans: ['Roboto', 'sans-serif'],
 			},
 		},
 	},

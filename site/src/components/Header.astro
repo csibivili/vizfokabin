@@ -1,11 +1,9 @@
 ---
-import NavItem from './NavItem.astro';
+import logo from '../assets/images/logos/default.svg';
 ---
 
-<header class="absolute top-0 left-0 md:w-full z-10 p-6">
-	<nav class="flex flex-col md:flex-row md:items-center gap-4">
-		<!-- <NavItem href="#services" label="services" /> -->
-		<!-- <NavItem href="/about-us" label="about us" /> -->
-		<!-- <NavItem href="/contact-us" label="contact us" /> -->
-	</nav>
+<header class="absolute top-0 left-0 w-full z-10 py-3 px-6 bg-black shadow-md">
+	<a href="/">
+		<img src={logo.src} alt="Logo" class="h-16" />
+	</a>
 </header>
