@@ -1,9 +1,9 @@
 ---
 interface Props {
-	title?: string;
-	description?: string;
-	favicon?: string;
-	image?: string;
+	title?: string
+	description?: string
+	favicon?: string
+	image?: string
 }
 
 const {
@@ -11,10 +11,12 @@ const {
 	description = "Fedezd fel a Bükk hegység szépségeit",
 	favicon = "/favicon.svg",
 	image = "/favicon.svg",
-} = Astro.props;
+} = Astro.props
 
-const siteUrl = Astro.site?.href || Astro.url.origin;
-const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWith("/") ? image : `/${image}`}`;
+const siteUrl = Astro.site?.href || Astro.url.origin
+const fullImageUrl = image.startsWith("http")
+	? image
+	: `${siteUrl}${image.startsWith("/") ? image : `/${image}`}`
 ---
 
 <!doctype html>
@@ -24,29 +26,59 @@ const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image.start
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href={favicon} />
 		<meta name="generator" content={Astro.generator} />
-		
+
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
-		
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={Astro.url.href} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={fullImageUrl} />
-		
+
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content={Astro.url.href} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={fullImageUrl} />
-		
+
+		<!-- Lodgify -->
+		<script
+			src="https://app.lodgify.com/portable-search-bar/stable/renderPortableSearchBar.js"
+			defer></script>
+		<style>
+			:root {
+				--ldg-psb-background: #ffffff;
+				--ldg-psb-border-radius: 0.42em;
+				--ldg-psb-box-shadow: 0px 24px 54px 0px rgba(0, 0, 0, 0.1);
+				--ldg-psb-padding: 14px;
+				--ldg-psb-input-background: #ffffff;
+				--ldg-psb-button-border-radius: 8px;
+				--ldg-psb-color-primary: #b6b500;
+				--ldg-psb-color-primary-lighter: #dbda80;
+				--ldg-psb-color-primary-darker: #5b5b00;
+				--ldg-psb-color-primary-contrast: #0d0d0d;
+				--ldg-semantic-color-primary: #b6b500;
+				--ldg-semantic-color-primary-lighter: #dbda80;
+				--ldg-semantic-color-primary-darker: #5b5b00;
+				--ldg-semantic-color-primary-contrast: #0d0d0d;
+				--ldg-component-modal-z-index: 999;
+			}
+			#lodgify-search-bar {
+				width: 100%;
+			}
+		</style>
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<slot />
@@ -62,6 +94,6 @@ const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image.start
 		margin: 0;
 		width: 100%;
 		height: 100%;
-		font-family: 'Libre Caslon Display', serif;
+		font-family: "Libre Caslon Display", serif;
 	}
 </style>

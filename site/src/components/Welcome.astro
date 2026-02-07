@@ -1,12 +1,42 @@
 ---
-import heroImage from '../assets/images/hero/1.jpg';
-import Header from './Header.astro';
-import WelcomeLogo from './WelcomeLogo.astro';
+import heroImage from "../assets/images/hero/1.jpg"
+import Header from "./Header.astro"
 ---
 
-<div class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center" style={`background-image: url(${heroImage.src})`}>
+<div
+	class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
+	style={`background-image: url(${heroImage.src})`}
+>
 	<Header />
 	<div class="flex flex-col items-center gap-6">
-		<WelcomeLogo />
+		<div
+			id="lodgify-search-bar"
+			data-website-id="633653"
+			data-language-code="hu"
+			data-checkout-page-url="https://checkout.lodgify.com/vilmos-csibi/hu/#/760190"
+			data-dates-check-in-label="Érkezés"
+			data-dates-check-out-label="Távozás"
+			data-guests-counter-label="Vendégek"
+			data-guests-input-singular-label="{{NumberOfGuests}} vendég"
+			data-guests-input-plural-label="{{NumberOfGuests}} vendég"
+			data-location-input-label="Elhelyezkedés"
+			data-search-button-label="Keresés"
+			data-dates-input-min-stay-tooltip-text='{"one":"Minimum {minStay} \u00e9jszaka","other":"Minimum {minStay} \u00e9jszaka"}'
+			data-guests-breakdown-label="Vendégek"
+			data-adults-label='{"one":"feln\u0151tt","other":"feln\u0151ttek"}'
+			data-adults-description="{minAge} vagy annál idősebb korosztály"
+			data-children-label='{"one":"gyermek","other":"gyerekek"}'
+			data-children-description="Életkorok: {minAge} – {maxAge}"
+			data-children-not-allowed-label="Gyermekek számára nem alkalmas"
+			data-infants-label='{"one":"csecsem\u0151","other":"csecsem\u0151k"}'
+			data-infants-description="Kevesebb, mint {maxAge}"
+			data-infants-not-allowed-label="Nem alkalmas csecsemők számára"
+			data-pets-label='{"one":"h\u00e1zi\u00e1llat","other":"h\u00e1zi\u00e1llatok"}'
+			data-pets-not-allowed-label="Nem engedélyezett"
+			data-done-label="Kész"
+			data-new-tab="true"
+			data-version="stable"
+		>
+		</div>
 	</div>
 </div>
