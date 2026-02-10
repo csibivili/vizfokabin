@@ -1,19 +1,19 @@
 {
-    "name": "vizfokabin",
-    "scripts": {
-        "start:site:dev": "pnpm --filter site dev",
-        "deploy:site:dev": "pnpm --filter site build && pulumi up --stack dev",
-        "deploy:site:prod": "pnpm --filter site build && pulumi up --stack prod",
-        "preview:prod": "pulumi preview --stack prod",
-        "destroy:prod": "pulumi destroy --stack prod"
-    },
-    "devDependencies": {
-        "@types/node": "^18",
-        "typescript": "^5.0.0"
-    },
-    "dependencies": {
-        "@pulumi/aws": "^7.0.0",
-        "@pulumi/synced-folder": "^0.12.4",
-        "@pulumi/pulumi": "^3.113.0"
-    }
+  "name": "vizfokabin",
+  "scripts": {
+    "start:site:dev": "pnpm --filter site dev",
+    "deploy:site:dev": "pnpm --filter site build && pulumi up --stack dev",
+    "deploy:site:prod": "pnpm --filter site build && pulumi up --stack prod && aws cloudfront create-invalidation --distribution-id $(pulumi stack output cdnId --stack prod) --paths '/*'",
+    "preview:prod": "pulumi preview --stack prod",
+    "destroy:prod": "pulumi destroy --stack prod"
+  },
+  "devDependencies": {
+    "@types/node": "^18",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@pulumi/aws": "^7.0.0",
+    "@pulumi/synced-folder": "^0.12.4",
+    "@pulumi/pulumi": "^3.113.0"
+  }
 }

@@ -60,6 +60,7 @@ const bucketFolder = new synced_folder.S3BucketFolder(`${config.name}-bucket-fol
     path: path,
     bucketName: bucket.bucket,
     acl: "private",
+    // managedObjects: false,
 }, { dependsOn: [publicAccessBlock, bucketPolicy]});
 
 // Set up custom domain if provided
@@ -217,6 +218,7 @@ if (domainName && zoneIdOutput) {
 // Export the URLs and hostnames of the bucket and distribution.
 export const originURL = pulumi.interpolate`http://${bucketWebsite.websiteEndpoint}`;
 export const originHostname = bucketWebsite.websiteEndpoint;
+export const cdnId = cdn.id;
 export const cdnURL = pulumi.interpolate`https://${cdn.domainName}`;
 export const cdnHostname = cdn.domainName;
 export const customDomainURL = domainName ? pulumi.interpolate`https://${domainName}` : undefined;

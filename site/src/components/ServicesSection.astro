@@ -1,0 +1,21 @@
+---
+import { Bath, Dog, Trees } from 'lucide-astro';
+
+const services = [
+	{ icon: Bath, label: 'kültéri jacuzzi' },
+	{ icon: Dog, label: 'kutyabarát' },
+	{ icon: Trees, label: 'privát kert' },
+];
+---
+
+<section class="py-12 px-6 bg-stone-100">
+	<h2 class="text-center text-xl font-medium text-stone-800 mb-8">Amiket a legjobban szerettek</h2>
+	<div class="flex flex-wrap justify-center gap-12 max-w-4xl mx-auto">
+		{services.map(({ icon: Icon, label }) => (
+			<div class="flex flex-col items-center gap-2">
+				<Icon size={32} class="text-stone-700" />
+				<span class="text-sm text-stone-600">{label}</span>
+			</div>
+		))}
+	</div>
+</section>

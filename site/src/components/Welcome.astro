@@ -1,13 +1,20 @@
 ---
-import heroImage from "../assets/images/hero/1.jpg"
-import Header from "./Header.astro"
+import hero1 from "../assets/images/hero/1.jpg"
+import hero2 from "../assets/images/hero/2.jpg"
+import hero3 from "../assets/images/hero/3.jpg"
+import hero4 from "../assets/images/hero/4.jpg"
+
+const images = [hero1, hero2, hero3, hero4]
 ---
 
-<div
-	class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
-	style={`background-image: url(${heroImage.src})`}
->
-	<div class="flex flex-col items-center gap-6">
+<div class="relative min-h-screen flex items-center justify-center overflow-hidden">
+	{images.map((img, i) => (
+		<div
+			class="absolute inset-0 bg-cover bg-center bg-no-repeat slideshow-slide"
+			style={`background-image: url(${img.src})`}
+		/>
+	))}
+	<div class="relative z-10 flex flex-col items-center gap-6">
 		<div
 			id="lodgify-search-bar"
 			data-website-id="633653"
@@ -39,3 +46,41 @@ import Header from "./Header.astro"
 		</div>
 	</div>
 </div>
+
+<style>
+	.slideshow-slide {
+		animation: slideshow 24s infinite ease-in-out;
+	}
+	@keyframes slideshow {
+		0% { opacity: 1; }
+		18% { opacity: 1; }
+		25% { opacity: 0; }
+		100% { opacity: 0; }
+	}
+	.slideshow-slide:nth-child(2) { animation-name: slideshow2; }
+	.slideshow-slide:nth-child(3) { animation-name: slideshow3; }
+	.slideshow-slide:nth-child(4) { animation-name: slideshow4; }
+	@keyframes slideshow2 {
+		0% { opacity: 0; }
+		22% { opacity: 0; }
+		25% { opacity: 1; }
+		43% { opacity: 1; }
+		50% { opacity: 0; }
+		100% { opacity: 0; }
+	}
+	@keyframes slideshow3 {
+		0% { opacity: 0; }
+		47% { opacity: 0; }
+		50% { opacity: 1; }
+		68% { opacity: 1; }
+		75% { opacity: 0; }
+		100% { opacity: 0; }
+	}
+	@keyframes slideshow4 {
+		0% { opacity: 0; }
+		72% { opacity: 0; }
+		75% { opacity: 1; }
+		97% { opacity: 1; }
+		100% { opacity: 0; }
+	}
+</style>

@@ -1,6 +1,8 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import logo from '../assets/images/logos/default.svg';
+import heroImage from '../assets/images/hero/1.jpg';
 
 interface Props {
 	title?: string
@@ -9,14 +11,17 @@ interface Props {
 	image?: string
 }
 
+const logoUrl = typeof logo === 'string' ? logo : logo.src;
+const heroUrl = typeof heroImage === 'string' ? heroImage : heroImage.src;
+
 const {
 	title = "Vizfő Kabin - Prémium pihenés",
 	description = "Fedezd fel a Bükk hegység szépségeit",
-	favicon = "/favicon.svg",
-	image = "/favicon.svg",
+	favicon = logoUrl,
+	image = heroUrl,
 } = Astro.props
 
-const siteUrl = Astro.site?.href || Astro.url.origin
+const siteUrl = (Astro.site?.href || Astro.url.origin).replace(/\/$/, '')
 const fullImageUrl = image.startsWith("http")
 	? image
 	: `${siteUrl}${image.startsWith("/") ? image : `/${image}`}`
@@ -41,6 +46,9 @@ const fullImageUrl = image.startsWith("http")
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={fullImageUrl} />
+		<meta property="og:image:width" content="2000" />
+		<meta property="og:image:height" content="1500" />
+		<meta property="og:image:type" content="image/jpeg" />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
