@@ -1,29 +1,58 @@
 ---
-import logo from '../assets/images/logos/default.svg';
-import { Facebook, Instagram } from 'lucide-astro';
+import logo from "../assets/images/logos/default.svg"
+import { Facebook, Instagram } from "lucide-astro"
 ---
 
 <footer class="bg-black text-primary text-sm py-8 px-6">
-	<div class="flex flex-wrap gap-8 justify-between items-center max-w-7xl mx-auto">
+	<div
+		class="flex flex-wrap gap-8 justify-between items-center max-w-7xl mx-auto"
+	>
 		<div class="flex flex-col gap-2">
-			<a href="https://www.booking.com/hotel/hu/vizfo-kabin.hu.html" target="_blank" rel="noopener noreferrer" class="hover:opacity-70" style="color: #003580; text-shadow: 0 0 1px rgba(255, 255, 255, 0.8);">Booking.com</a>
-			<a href="https://www.airbnb.hu/h/vizfokabin" target="_blank" rel="noopener noreferrer" class="hover:opacity-70" style="color: #FF5A5F;">Airbnb</a>
+			<a
+				href="https://www.booking.com/hotel/hu/vizfo-kabin.hu.html"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="hover:opacity-70"
+				style="color: #003580; text-shadow: 0 0 1px rgba(255, 255, 255, 0.8);"
+				>Booking.com</a
+			>
+			<a
+				href="https://www.airbnb.hu/h/vizfokabin"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="hover:opacity-70"
+				style="color: #FF5A5F;">Airbnb</a
+			>
 		</div>
-		
+
 		<div class="flex flex-col items-center gap-3">
-			<a href="mailto:info@vizfokabin.com" class="hover:opacity-70">info@vizfokabin.com</a>
+			<a href="mailto:info@vizfokabin.com" class="hover:opacity-70"
+				>info@vizfokabin.com</a
+			>
 			<div class="flex gap-4">
-				<a href="https://www.facebook.com/profile.php?id=61560278563124" target="_blank" rel="noopener noreferrer" class="hover:opacity-70" title="Facebook">
+				<a
+					href="https://www.facebook.com/profile.php?id=61560278563124"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:opacity-70"
+					title="Facebook"
+				>
 					<Facebook size={28} />
 				</a>
-				<a href="https://www.instagram.com/vizfokabin/" target="_blank" rel="noopener noreferrer" class="hover:opacity-70" title="Instagram">
+				<a
+					href="https://www.instagram.com/vizfokabin/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hover:opacity-70"
+					title="Instagram"
+				>
 					<Instagram size={28} />
 				</a>
 			</div>
 		</div>
-		
-		<div class="flex items-center">
-			<img src={logo.src} alt="Logo" class="h-20" />
+
+		<div class="flex items-center w-full justify-center">
+			<img src={logo.src} alt="Logo" class="h-32" />
 		</div>
 	</div>
 </footer>
