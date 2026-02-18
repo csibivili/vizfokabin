@@ -8,42 +8,71 @@ import gallery3 from "../assets/images/gallery/3.jpg"
 import gallery4 from "../assets/images/gallery/4.jpg"
 import gallery5 from "../assets/images/gallery/5.jpg"
 
+import SectionTitle from "./SectionTitle.astro"
 
-const images = [hero1, hero2, hero3, gallery1, gallery3, gallery2, gallery4, gallery5]
+const images = [
+	hero1,
+	hero2,
+	hero3,
+	gallery1,
+	gallery3,
+	gallery2,
+	gallery4,
+	gallery5,
+]
 ---
 
-<section class="py-12 px-6 bg-white">
-	<h2 class="text-center text-xl font-medium text-stone-800 mb-8">Galéria</h2>
-	<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-		{images.map((img) => (
-			<button type="button" class="gallery-thumb border-0 p-0 bg-transparent cursor-pointer text-left" data-src={img.src}>
-				<img src={img.src} alt="" class="w-full aspect-[4/3] object-cover rounded-lg hover:opacity-90 transition-opacity" />
+<SectionTitle text="Galéria" />
+<div
+	class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
+>
+	{
+		images.map((img) => (
+			<button
+				type="button"
+				class="gallery-thumb border-0 p-0 bg-transparent cursor-pointer text-left"
+				data-src={img.src}
+			>
+				<img
+					src={img.src}
+					alt=""
+					class="w-full aspect-[4/3] object-cover rounded-lg hover:opacity-90 transition-opacity"
+				/>
 			</button>
-		))}
-	</div>
-</section>
+		))
+	}
+</div>
 
-<div id="gallery-popup" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 cursor-pointer" aria-hidden="true">
-	<img id="gallery-popup-img" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl" />
+<div
+	id="gallery-popup"
+	class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 cursor-pointer"
+	aria-hidden="true"
+>
+	<img
+		id="gallery-popup-img"
+		src=""
+		alt=""
+		class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl"
+	/>
 </div>
 
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const popup = document.getElementById('gallery-popup');
-		const popupImg = document.getElementById('gallery-popup-img');
-		const thumbs = document.querySelectorAll('.gallery-thumb');
+	document.addEventListener("DOMContentLoaded", () => {
+		const popup = document.getElementById("gallery-popup")
+		const popupImg = document.getElementById("gallery-popup-img")
+		const thumbs = document.querySelectorAll(".gallery-thumb")
 
 		thumbs.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				popupImg.src = btn.dataset.src;
-				popup.classList.remove('hidden');
-				popup.classList.add('flex');
-			});
-		});
+			btn.addEventListener("click", () => {
+				popupImg.src = btn.dataset.src
+				popup.classList.remove("hidden")
+				popup.classList.add("flex")
+			})
+		})
 
-		popup.addEventListener('click', () => {
-			popup.classList.add('hidden');
-			popup.classList.remove('flex');
-		});
-	});
+		popup.addEventListener("click", () => {
+			popup.classList.add("hidden")
+			popup.classList.remove("flex")
+		})
+	})
 </script>

@@ -1,9 +1,13 @@
 ---
 import Welcome from "../components/Welcome.astro"
+import Section from "../components/Section.astro"
 import ServicesSection from "../components/ServicesSection.astro"
+import Ratings from "../components/Ratings.astro"
 import Gallery from "../components/Gallery.astro"
 import Map from "../components/Map.astro"
 import Layout from "../layouts/Layout.astro"
+
+const sections = [ServicesSection, Ratings, Gallery, Map]
 ---
 
 <Layout
@@ -11,7 +15,11 @@ import Layout from "../layouts/Layout.astro"
 	description="Fedezd fel a Bükk hegység szépségeit"
 >
 	<Welcome />
-	<ServicesSection />
-	<Gallery />
-	<Map />
+	{
+		sections.map((Component, i) => (
+			<Section index={i}>
+				<Component />
+			</Section>
+		))
+	}
 </Layout>

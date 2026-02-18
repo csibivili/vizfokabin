@@ -1,0 +1,47 @@
+---
+import { Star } from "lucide-astro"
+import SectionTitle from "./SectionTitle.astro"
+
+const ratings = [
+	{
+		platform: "Booking.com",
+		score: 9.7,
+		outOf: 10,
+		reviews: 57,
+		href: "https://www.booking.com/hotel/hu/vizfo-kabin.hu.html",
+		color: "#003580",
+	},
+	{
+		platform: "Airbnb",
+		score: 5.0,
+		outOf: 5,
+		reviews: 22,
+		href: "https://www.airbnb.hu/h/vizfokabin",
+		color: "#FF5A5F",
+	},
+]
+---
+
+<SectionTitle text="Vendégeink értékelései" />
+<div class="flex flex-wrap justify-center gap-12 max-w-4xl mx-auto">
+	{
+		ratings.map(({ platform, score, outOf, reviews, href, color }) => (
+			<a
+				href={href}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex flex-col items-center gap-2 no-underline hover:opacity-80 transition-opacity"
+			>
+				<span class="text-sm font-medium" style={`color: ${color}`}>
+					{platform}
+				</span>
+				<div class="flex items-center gap-1.5">
+					<Star size={20} class="text-amber-400 fill-amber-400" />
+					<span class="text-2xl font-bold text-stone-800">{score}</span>
+					<span class="text-sm text-stone-500">/ {outOf}</span>
+				</div>
+				<span class="text-xs text-stone-400">({reviews} értékelés)</span>
+			</a>
+		))
+	}
+</div>
