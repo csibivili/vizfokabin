@@ -1,8 +1,8 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import logo from '../assets/images/logos/default.svg';
-import heroImage from '../assets/images/hero/1.jpg';
+import Header from "../components/Header.astro"
+import Footer from "../components/Footer.astro"
+import logo from "../assets/images/logos/default.svg"
+import heroImage from "../assets/images/hero/1.jpg"
 
 interface Props {
 	title?: string
@@ -11,8 +11,8 @@ interface Props {
 	image?: string
 }
 
-const logoUrl = typeof logo === 'string' ? logo : logo.src;
-const heroUrl = typeof heroImage === 'string' ? heroImage : heroImage.src;
+const logoUrl = typeof logo === "string" ? logo : logo.src
+const heroUrl = typeof heroImage === "string" ? heroImage : heroImage.src
 
 const {
 	title = "Vizfő Kabin - Prémium pihenés",
@@ -21,7 +21,7 @@ const {
 	image = heroUrl,
 } = Astro.props
 
-const siteUrl = (Astro.site?.href || Astro.url.origin).replace(/\/$/, '')
+const siteUrl = (Astro.site?.href || Astro.url.origin).replace(/\/$/, "")
 const fullImageUrl = image.startsWith("http")
 	? image
 	: `${siteUrl}${image.startsWith("/") ? image : `/${image}`}`
@@ -56,6 +56,21 @@ const fullImageUrl = image.startsWith("http")
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={fullImageUrl} />
+
+		<!-- Google Tag Manager -->
+		<script>
+			;(function (w, d, s, l, i) {
+				w[l] = w[l] || []
+				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" })
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : ""
+				j.async = true
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl
+				f.parentNode.insertBefore(j, f)
+			})(window, document, "script", "dataLayer", "GTM-53P7XGLT")
+		</script>
+		<!-- End Google Tag Manager -->
 
 		<!-- Lodgify -->
 		<script
@@ -92,6 +107,16 @@ const fullImageUrl = image.startsWith("http")
 		/>
 	</head>
 	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript
+			><iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-53P7XGLT"
+				height="0"
+				width="0"
+				style="display:none;visibility:hidden"></iframe></noscript
+		>
+		<!-- End Google Tag Manager (noscript) -->
+		 
 		<Header />
 		<slot />
 		<Footer />
